@@ -173,15 +173,6 @@ class Php52 < Formula
     system "make install"
 
     etc.install "./php.ini-production" => "php.ini" unless File.exists? etc+"php.ini"
-    if ARGV.include?('--with-fpm') and not File.exists? etc+"php-fpm.conf"
-     	etc.install "sapi/fpm/php-fpm.conf"
-     	inreplace etc+"php-fpm.conf" do |s|
-     	  s.sub!(/^;?daemonize\s*=.+$/,'daemonize = no')
-     	  s.sub!(/^;?pm\.start_servers\s*=.+$/,'pm.start_servers = 20')
-     	  s.sub!(/^;?pm\.min_spare_servers\s*=.+$/,'pm.min_spare_servers = 5')
-     	  s.sub!(/^;?pm\.max_spare_servers\s*=.+$/,'pm.max_spare_servers = 35')
-      end
-    end
   end
 
  def caveats; <<-EOS
@@ -211,6 +202,10 @@ If you have installed the formula with --with-fpm, to launch php-fpm on startup:
      	 launchctl load -w ~/Library/LaunchAgents/org.php-fpm.plist
      	
   You may also need to edit the plist to use the correct "UserName".
+  
+  
+Since php 5.2 doesn't deliver a php-fpm conf file, please install it mannualy
+    in #{etc}/php-fpm.conf'
    EOS
  end
 
