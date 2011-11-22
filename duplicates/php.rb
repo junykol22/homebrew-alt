@@ -9,10 +9,10 @@ def postgres_installed?
 end
 
 class Php < Formula
-  url 'http://www.php.net/get/php-5.3.8.tar.bz2/from/this/mirror'
+  url 'http://www.php.net/get/php-5.2.17.tar.bz2/from/this/mirror'
   homepage 'http://php.net/'
-  md5 '704cd414a0565d905e1074ffdc1fadfb'
-  version '5.3.8'
+  md5 'b27947f3045220faf16e4d9158cbfe13'
+  version '5.2.17'
 
   # So PHP extensions don't report missing symbols
   skip_clean ['bin', 'sbin']
@@ -54,7 +54,10 @@ class Php < Formula
    ]
   end
 
-  def patches; DATA; end
+  def patches
+      # PHP-FPM patch (http://php-fpm.org)
+      return "http://php-fpm.org/downloads/php-5.2.17-fpm-0.5.14.diff.gz" if ARGV.include? '--with-fpm'
+    end
 
   def install
     args = [
@@ -111,6 +114,8 @@ class Php < Formula
     # Enable PHP FPM
     if ARGV.include? '--with-fpm'
       args.push "--enable-fpm"
+      args.push "--enable-fastcgi"
+      args.push "--with-libevent=#{Formula.factory('libevent').prefix}"
     end
 
     # Build Apache module by default
