@@ -222,32 +222,32 @@ If you have installed the formula with --with-fpm, to launch php-fpm on startup:
   	end
   end
  	
-  def php_fpm_startup_plist; <<-EOPLIST.undent
-   <?xml version="1.0" encoding="UTF-8"?>
- 	 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
- 	 <plist version="1.0">
- 	   <dict>
- 	     <key>KeepAlive</key>
- 	     <true/>
-       <key>Label</key>
-       <string>org.php-fpm</string>
-       <key>ProgramArguments</key>
-       <array>
-         <string>#{sbin}/php-fpm</string>
-         <string>--fpm-config</string>
-         <string>#{etc}/php-fpm.conf</string>
-       </array>
-       <key>RunAtLoad</key>
+  def php_fpm_startup_plist; <<-EOPLIST.unindent
+    <?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+    <plist version="1.0">
+     <dict>
+       <key>KeepAlive</key>
        <true/>
-       <key>UserName</key>
-       <string>#{`whoami`.chomp}</string>
-       <key>WorkingDirectory</key>
-       <string>#{var}</string>
-       <key>StandardErrorPath</key>
-       <string>#{prefix}/var/log/php-fpm.log</string>
-     </dict>	
-     </plist>	
-     EOPLIST	
+     <key>Label</key>
+     <string>org.php-fpm</string>
+     <key>ProgramArguments</key>
+     <array>
+       <string>#{sbin}/php-fpm</string>
+       <string>--fpm-config</string>
+       <string>#{etc}/php-fpm.conf</string>
+     </array>
+     <key>RunAtLoad</key>
+     <true/>
+     <key>UserName</key>
+     <string>#{`whoami`.chomp}</string>
+     <key>WorkingDirectory</key>
+     <string>#{var}</string>
+     <key>StandardErrorPath</key>
+     <string>#{prefix}/var/log/php-fpm.log</string>
+    </dict>	
+    </plist>	
+     EOPLIST
   end
 end
 
