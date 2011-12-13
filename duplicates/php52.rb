@@ -133,9 +133,9 @@ class Php52 < Formula
 
     if ARGV.include? '--with-mysql'
       args.push "--with-mysql-sock=/tmp/mysql.sock"
-      args.push "--with-mysqli=#{Formula.factory('mysql').prefix}"
-      args.push "--with-mysql=#{Formula.factory('mysql').prefix}"
-      args.push "--with-pdo-mysql=#{Formula.factory('mysql').prefix}"
+      args.push "--with-mysqli=#{Formula.factory('mysql').prefix}/bin/"
+      args.push "--with-mysql=#{Formula.factory('mysql').prefix}/bin/"
+      args.push "--with-pdo-mysql=#{Formula.factory('mysql').prefix}/bin/"
     end
 
     if ARGV.include? '--with-pgsql'
