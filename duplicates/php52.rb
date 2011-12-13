@@ -132,9 +132,9 @@ class Php52 < Formula
 
     if ARGV.include? '--with-mysql'
       args.push "--with-mysql-sock=/tmp/mysql.sock"
-      args.push "--with-mysqli=mysql"
-      args.push "--with-mysql=mysql"
-      args.push "--with-pdo-mysql=mysql"
+      args.push "--with-mysqli=/usr/local/Cellar/mysql/5.5.15/"
+      args.push "--with-mysql=/usr/local/Cellar/mysql/5.5.15/"
+      args.push "--with-pdo-mysql=/usr/local/Cellar/mysql/5.5.15/"
     end
 
     if ARGV.include? '--with-pgsql'
