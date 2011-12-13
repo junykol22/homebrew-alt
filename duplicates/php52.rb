@@ -24,6 +24,7 @@ class Php52 < Formula
   depends_on 'mcrypt'
   depends_on 'mhash'
   depends_on 'gmp' if ARGV.include? '--with-gmp'
+  depends_on 'mysql' if ARGV.include? '--with-mysql'
 
   depends_on 'libevent' if ARGV.include? '--with-fpm'
   depends_on 'freetds'if ARGV.include? '--with-mssql'
@@ -132,9 +133,9 @@ class Php52 < Formula
 
     if ARGV.include? '--with-mysql'
       args.push "--with-mysql-sock=/tmp/mysql.sock"
-      args.push "--with-mysqli=/usr/local/Cellar/mysql/5.5.15/"
-      args.push "--with-mysql=/usr/local/Cellar/mysql/5.5.15/"
-      args.push "--with-pdo-mysql=/usr/local/Cellar/mysql/5.5.15/"
+      args.push "--with-mysqli=#{Formula.factory('mysql').prefix}"
+      args.push "--with-mysql=#{Formula.factory('mysql').prefix}"
+      args.push "--with-pdo-mysql=#{Formula.factory('mysql').prefix}"
     end
 
     if ARGV.include? '--with-pgsql'
