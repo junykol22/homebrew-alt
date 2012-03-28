@@ -200,6 +200,9 @@ If you have installed the formula with --with-fpm, to launch php-fpm on startup:
      	 launchctl unload -w ~/Library/LaunchAgents/org.php-fpm.plist
      	 cp #{prefix}/org.php-fpm.plist ~/Library/LaunchAgents/
      	 launchctl load -w ~/Library/LaunchAgents/org.php-fpm.plist
+     	 
+  * Add the agent to the conf file (~/.launchd.conf):
+       load ~/Library/LaunchAgents/org.php-fpm.plist
      	
   You may also need to edit the plist to use the correct "UserName".
   
@@ -229,6 +232,7 @@ Since php 5.2 doesn't deliver a php-fpm conf file, please install it mannualy
      <key>ProgramArguments</key>
      <array>
        <string>#{sbin}/php-fpm</string>
+       <string>start</string>
        <string>--fpm-config</string>
        <string>#{etc}/php-fpm.conf</string>
      </array>
