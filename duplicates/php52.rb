@@ -172,7 +172,6 @@ class Php52 < Formula
     ENV.deparallelize # parallel install fails on some systems
     system "make install"
 
-    #etc.install "./php.ini-production" => "php.ini" unless File.exists? etc+"php.ini"
   end
 
  def caveats; <<-EOS
